@@ -15,6 +15,11 @@ db = SQLAlchemy(metadata=metadata)
 class User(db.Model, SerializerMixin):
     __table_name__ = "users"
 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    username = db.Column(db.String)
+    _password_hash = db.Column(db.String, nullable=False)
+
 
 class Hotel(db.Model, SerializerMixin):
     __table_name__ = "hotels"
