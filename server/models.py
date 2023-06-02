@@ -17,15 +17,37 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
+    city = db.Column(db.String)
 
 
 class Hotel(db.Model, SerializerMixin):
     __table_name__ = "hotels"
 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    city = db.Column(db.String)
+    price = db.Column(db.Numeric(scale=2))
+
+
 class Flight(db.Model, SerializerMixin):
     __table_name__ = "flights"
 
+    id = db.Column(db.Integer, primary_key=True)
+    departure_city = db.Column(db.String)
+    arrival_city = db.Column(db.String)
+    departure_day = db.Column(db.DateTime)
+    arrival_day = db.Column(db.DateTime)
+    price = db.Column(db.Numeric(scale=2))
+
+
 class Trip(db.Model, SerializerMixin):
     __table_name__ = "trips"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotels.id'))
+    flight_id = db.Column(db.Integer, db.ForeignKey('flights.id'))
+    total_price = db.Column(db.Numeric(scale=2))
+    
