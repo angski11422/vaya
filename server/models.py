@@ -12,7 +12,7 @@ from config import *
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-updated_at', '-created_at',)
+    serialize_rules = ('-updated_at', '-created_at', '-trips.user')
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -28,7 +28,7 @@ class User(db.Model, SerializerMixin):
 class Hotel(db.Model, SerializerMixin):
     __tablename__ = "hotels"
 
-    serialize_rules = ('-updated_at', '-created_at',)
+    serialize_rules = ('-updated_at', '-created_at', '-trips.hotel')
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -43,7 +43,7 @@ class Hotel(db.Model, SerializerMixin):
 class Flight(db.Model, SerializerMixin):
     __tablename__ = "flights"
 
-    serialize_rules = ('-updated_at', '-created_at',)
+    serialize_rules = ('-updated_at', '-created_at', '-trips.flight')
 
     id = db.Column(db.Integer, primary_key=True)
     departure_city = db.Column(db.String)
@@ -60,7 +60,8 @@ class Flight(db.Model, SerializerMixin):
 class Trip(db.Model, SerializerMixin):
     __tablename__ = "trips"
 
-    serialize_rules = ('-updated_at', '-created_at',)
+    serialize_rules = ('-updated_at', '-created_at',
+                       '-flight.trips', '-hotel.trips', '-user.trips')
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -69,4 +70,3 @@ class Trip(db.Model, SerializerMixin):
     total_price = db.Column(db.Numeric(scale=2))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-    
