@@ -1,9 +1,19 @@
-import { useState } from 'react'
-import './style.css'
+import React from 'react'
+import Header from './Header';
+import Nav from './Nav';
+import Content from './Content';
 
-function App() {
+export default function App() {
   
+
+    return(
+        <div className="container">
+            <Header />
+            <Nav />
+            <Content />
+        </div>
+    )
+
 
 }
 
-export default App
