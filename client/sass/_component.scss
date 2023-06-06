@@ -102,6 +102,19 @@
         align-items: center;
     }
 
+    &__button {
+        border: none;
+        background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+        height: 75%;
+        width: 100%;
+        border-radius: 3rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        padding: 0rem 3rem;
+        font-family: inherit;
+    }
+
     &__user-photo {
         height: 3.75rem;
         border-radius: 50%;
