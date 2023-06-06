@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import request, session
 from flask_restful import Resource
 from datetime import datetime
 
@@ -12,6 +12,68 @@ from config import *
 from models import User, Flight, Hotel, Trip
 
 # Views go here!
+
+
+class Login(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+
+        user = User.query.filter(
+            User.username == username).first()
+
+        if user.authenticate(password):
+            session['user_id'] = user.id
+            return user.to_dict(), 200
+        return {}, 401
+
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return {}, 204
+
+
+class CheckSession(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            return user.to_dict()
+        else:
+            return {}, 401
+
+
+class Signup(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+        city = request.get_json()['city']
+        name = request.get_json()['name']
+
+        if username and password:
+            new_user = User(username=username, city=city, name=name)
+            new_user.password_hash = password
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            session['user_id'] = new_user.id
+
+            return new_user.to_dict(), 201
+        return {}, 422
+
+
+class UsersPath(Resource):
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+        return users, 200
+
+
+class UserByID(Resource):
+    def get(self, id):
+        user = User.query.filter(User.id == id).first()
+        return user.to_dict(), 200
 
 
 class FlightsPath(Resource):
@@ -96,17 +158,10 @@ class TripByID(Resource):
         return trip.to_dict(), 200
 
 
-class UsersPath(Resource):
-    def get(self):
-        users = [user.to_dict() for user in User.query.all()]
-        return users, 200
-
-
-class UserByID(Resource):
-    def get(self, id):
-        user = User.query.filter(User.id == id).first()
-        return user.to_dict(), 200
-
+api.add_resource(Logout, '/logout')
+api.add_resource(Login, '/login')
+api.add_resource(CheckSession, '/check_session')
+api.add_resource(Signup, '/signup')
 
 api.add_resource(FlightsPath, '/flights')
 api.add_resource(FlightByID, '/flights/<int:id>')
