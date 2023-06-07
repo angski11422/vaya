@@ -13,7 +13,8 @@ from models import db, User, Hotel, Flight, Trip
 if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
-        cities = ["Denver", "Boston", "New York City", "Las Vegas", "Los Angeles", "Chicago", "Miami", "Seattle", "Houston", "Dallas"]
+        cities = ["Washington D.C.", "Orlando", "New York City", "Las Vegas", "San Diego", "San Francisco", "Miami", "Seattle", "New Orleans", "Honolulu"]
+        hotels = ["Waldorf Astoria", "Hard Rock Hotel", "Baccarat Hotel", "Cosmopolitan", "Rancho Valencia", "Four Seasons", "The Setai", "The Thompson", "The Windsor Court", "The Ritz Carlton"]
         #Seed code goes here!
         print("Deleting data...")
         User.query.delete()
