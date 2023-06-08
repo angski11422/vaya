@@ -1,10 +1,25 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import SignIn from './SignIn';
+import UserPage from './UserPage';
 
 
 
 
 export default function Header() {
+    const [user, setUser] = useState(null)
+    const [isUserPage, setIsUserPage] = useState(false)
+
+
+    useEffect(() => {
+        fetch('/api/check_session')
+        .then(r => r.json())
+        .then(data => setUser(data))
+    }, [])
+
+    function handleClick(){
+        setIsUserPage(!isUserPage)
+        return <UserPage />
+    }
 
     return (
         <>
@@ -34,9 +49,14 @@ export default function Header() {
                         <span className="user-nav__notification">0</span>
                     </div>
                     <div className="user-nav__user">
-                        <button className="user-nav__button"><SignIn /></button>
-                        {/* <!-- <img src="src/img/user.jpg" alt="User photo" className="user-nav__user-photo" />
-                        <span className="user-nav__user-name">NAME</span> --> */}
+                        {user ? (
+                            <div onClick={handleClick}>
+                                <img src="src/img/user.jpg" alt="User photo" className="user-nav__user-photo" />
+                                <span className="user-nav__user-name">NAME</span>
+                            </div>
+                        ) : (
+                            <button className="user-nav__button"><SignIn setUser={setUser}/></button>
+                        )}
                     </div>
                 </nav>
             </header>

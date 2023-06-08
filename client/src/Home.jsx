@@ -1,13 +1,13 @@
-import React from 'react';
+import Hotels from './Hotels';
+import Flights from './Flights';
 
 
-export default function Flights() {
-
-
+export default function Home() {
 
     return (
         <>
-         <h1>Hello World!</h1>
+            <Hotels />
+            <Flights/>
         </>
     )
 }

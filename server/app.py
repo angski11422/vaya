@@ -43,17 +43,19 @@ class Login(Resource):
 
         user = User.query.filter(
             User.username == username).first()
+        print(request.get_json())
 
         if user.authenticate(password):
             session['user_id'] = user.id
+            print(user.id)
             return user.to_dict(), 200
-        return {}, 401
-    
+        return None, 401
+
 
 class Logout(Resource):
     def delete(self):
         session['user_id'] = None
-        return {}, 204
+        return None, 204
 
 
 class CheckSession(Resource):
@@ -63,9 +65,29 @@ class CheckSession(Resource):
             user = User.query.filter(User.id == user_id).first()
             return user.to_dict()
         else:
-            return {}, 401
+            return None, 401
 
-# admin only get all users
+
+class Signup(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+        city = request.get_json()['city']
+        name = request.get_json()['name']
+
+        if username and password:
+            new_user = User(username=username, city=city, name=name)
+            new_user.password_hash = password
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            session['user_id'] = new_user.id
+
+            return new_user.to_dict(), 201
+        return None, 422
+
+
 class UsersPath(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]

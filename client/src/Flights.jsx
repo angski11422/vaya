@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import FlightCard from './FlightCard';
 
 
@@ -7,7 +7,7 @@ export default function Flights() {
     const [flightData, setFlightData] = useState([])
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5555/flights')
+        fetch('/api/flights')
         .then((res) => res.json())
         .then((data) => setFlightData(data))
     }, [])
