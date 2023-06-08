@@ -15,21 +15,21 @@ from models import User, Flight, Hotel, Trip
 
 class Signup(Resource):
     def post(self):
-        username = request.form['username']
-        password = request.form['password']
-        city = request.form['city']
-        name = request.form['full_name']
-        email = request.form['email']
-        # photo_file = request.files['profile_photo']
-
+        print(request.get_json())
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+        city = request.get_json()['city']
+        name = request.get_json()['full_name']
+        email = request.get_json()['email']
+        profile_photo = request.get_json()['profile_photo']
+        
         if username and password:
-            new_user = User(username=username, city=city, name=name, email=email)
+            new_user = User(username=username, city=city, name=name, email=email, profile_photo=profile_photo)
             new_user.password_hash = password
 
             db.session.add(new_user)
             db.session.commit()
 
-            # new_user.save_profile_photo(photo_file)
 
             session['user_id'] = new_user.id
 

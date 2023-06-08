@@ -30,13 +30,6 @@ class User(db.Model, SerializerMixin):
 
     trips = db.relationship('Trip', backref='user')
 
-    def save_profile_photo(self, photo_file):
-        if photo_file:
-            filename = f'{self.id}.jpg'
-            photo_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            photo_file.save(photo_path)
-            self.profile_photo = photo_path
-
 
     @hybrid_property
     def password_hash(self):

@@ -62,7 +62,7 @@ export default function Header({user, setUser} ) {
                     <div className="user-nav__user">
                         {user ? (
                             <div onClick={logOut}>
-                                <img src="{ url_for('static', filename=user.profile_photo) }" alt="Profile photo" className="user-nav__user-photo" />
+                                <img src={user.profile_photo} alt="Profile photo" className="user-nav__user-photo" />
                                 <span className="user-nav__user-name">{user.name}</span>
                             </div>
                         ) : (

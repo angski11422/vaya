@@ -34,7 +34,7 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
         username: "",
         password: "",
         email: "",
-        // profile_photo: "",
+        profile_photo: "",
     })
 
     function handleChange(e) {
@@ -51,12 +51,12 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
             username: formData.username,
             password: formData.password,
             email: formData.email,
-            // profile_photo: formData.profile_photo
+            profile_photo: formData.profile_photo
         }
         fetch('/api/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({new_user})
+            body: JSON.stringify(new_user)
         })
         .then((r) => r.json())
         .then(data => setUser(data))
@@ -110,8 +110,8 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
                             <input type="text" name="password" placeholder="password" value={FormData.password} onChange={handleChange}></input>
                             <label htmlFor='email'></label>
                             <input type="email" name="email" placeholder="email" value={FormData.email} onChange={handleChange}></input>
-                            {/* <label htmlFor="profile_photo">Upload a profile picture:</label>
-                            <input type="file" id="profile_photo" name="profile_photo" accept="image/png, image/jpeg" value={FormData.profile_photo} onChange={handleChange}></input> */}
+                            <label htmlFor="profile_photo"></label>
+                            <input type="text" placeholder="profile_photo" name="profile_photo" value={FormData.profile_photo} onChange={handleChange}></input>
                             <button type="submit">Sign Up</button>
                         </div>
                     </form>
