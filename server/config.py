@@ -35,4 +35,4 @@ CORS(app)
 # Instantiate Bcrypt
 bcrypt = Bcrypt(app)
 
-app.secret_key = b'&"\xc9\x86\xc3\x9b l\xa2\xe5\x12\x14\x87B\xec\x01'
+app.secret_key = b'\xa1G\x8b+\x95N\xeaM)L\x98\x10\x11T\xb9\xc1'

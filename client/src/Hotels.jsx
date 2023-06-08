@@ -3,8 +3,8 @@ import HotelCard from './HotelCard';
 
 
 
-export default function Hotels() {
-
+export default function Hotels({test}) {
+console.log(test)
 const [hotelData, setHotelData] = useState([])
 
     useEffect(() => {

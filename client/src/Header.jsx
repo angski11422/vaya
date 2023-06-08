@@ -1,13 +1,13 @@
 import {useState, useEffect} from 'react';
 import SignIn from './SignIn';
 import UserPage from './UserPage';
+import {Link} from 'react-router-dom'
 
 
 
 
 export default function Header() {
     const [user, setUser] = useState(null)
-    const [isUserPage, setIsUserPage] = useState(false)
 
 
     useEffect(() => {
@@ -17,8 +17,11 @@ export default function Header() {
     }, [])
 
     function handleClick(){
-        setIsUserPage(!isUserPage)
-        return <UserPage />
+        // return <UserPage />
+        return fetch('/api/logout', {
+            method: 'DELETE'
+        })
+        .then(setUser(null))
     }
 
     return (
@@ -51,11 +54,11 @@ export default function Header() {
                     <div className="user-nav__user">
                         {user ? (
                             <div onClick={handleClick}>
-                                <img src="src/img/user.jpg" alt="User photo" className="user-nav__user-photo" />
-                                <span className="user-nav__user-name">NAME</span>
+                                <img src="{ url_for('static', filename=user.profile_photo) }" alt="Profile photo" className="user-nav__user-photo" />
+                                <span className="user-nav__user-name">{user.name}</span>
                             </div>
                         ) : (
-                            <button className="user-nav__button"><SignIn setUser={setUser}/></button>
+                            <Link to='./signin' className="user-nav__button" state={setUser}>Sign in</Link>
                         )}
                     </div>
                 </nav>

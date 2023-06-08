@@ -15,21 +15,21 @@ from models import User, Flight, Hotel, Trip
 
 class Signup(Resource):
     def post(self):
-        username = request.get_json()['username']
-        password = request.get_json()['password']
-        city = request.get_json()['city']
-        name = request.get_json()['name']
-        email = request.get_json()['email']
-        photo_file = request.files['profile_photo']
+        username = request.form['username']
+        password = request.form['password']
+        city = request.form['city']
+        name = request.form['full_name']
+        email = request.form['email']
+        # photo_file = request.files['profile_photo']
 
         if username and password:
             new_user = User(username=username, city=city, name=name, email=email)
             new_user.password_hash = password
-
+            print (new_user)
             db.session.add(new_user)
             db.session.commit()
 
-            new_user.save_profile_photo(photo_file)
+            # new_user.save_profile_photo(photo_file)
 
             session['user_id'] = new_user.id
 
@@ -43,19 +43,11 @@ class Login(Resource):
 
         user = User.query.filter(
             User.username == username).first()
-        print(request.get_json())
 
         if user.authenticate(password):
             session['user_id'] = user.id
-            print(user.id)
             return user.to_dict(), 200
         return None, 401
-
-
-class Logout(Resource):
-    def delete(self):
-        session['user_id'] = None
-        return None, 204
 
 
 class CheckSession(Resource):
@@ -63,29 +55,14 @@ class CheckSession(Resource):
         user_id = session.get('user_id')
         if user_id:
             user = User.query.filter(User.id == user_id).first()
-            return user.to_dict()
+            return user.to_dict(), 200
         else:
             return None, 401
 
-
-class Signup(Resource):
-    def post(self):
-        username = request.get_json()['username']
-        password = request.get_json()['password']
-        city = request.get_json()['city']
-        name = request.get_json()['name']
-
-        if username and password:
-            new_user = User(username=username, city=city, name=name)
-            new_user.password_hash = password
-
-            db.session.add(new_user)
-            db.session.commit()
-
-            session['user_id'] = new_user.id
-
-            return new_user.to_dict(), 201
-        return None, 422
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return None, 204
 
 
 class UsersPath(Resource):
