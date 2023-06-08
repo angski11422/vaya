@@ -115,22 +115,22 @@ class FlightsPath(Resource):
         return flights, 200
 
 # admin only post 
-    def post(self):
-        try:
-            new_flight = Flight(
-                departure_day=datetime.strptime(
-                    request.get_json()['departure_day'], '%Y/%m/%d %H:%M:%S'),
-                arrival_day=datetime.strptime(
-                    request.get_json()['arrival_day'], '%Y/%m/%d %H:%M:%S'),
-                price=request.get_json()['price'],
-                departure_city=request.get_json()['departure_city'],
-                arrival_city=request.get_json()['arrival_city']
-            )
-            db.session.add(new_flight)
-            db.session.commit()
-            return new_flight.to_dict(), 201
-        except Exception:
-            return {"error": "Unable to create new flight."}, 400
+    # def post(self):
+    #     try:
+    #         new_flight = Flight(
+    #             departure_day=datetime.strptime(
+    #                 request.get_json()['departure_day'], '%Y/%m/%d %H:%M:%S'),
+    #             arrival_day=datetime.strptime(
+    #                 request.get_json()['arrival_day'], '%Y/%m/%d %H:%M:%S'),
+    #             price=request.get_json()['price'],
+    #             departure_city=request.get_json()['departure_city'],
+    #             arrival_city=request.get_json()['arrival_city']
+    #         )
+    #         db.session.add(new_flight)
+    #         db.session.commit()
+    #         return new_flight.to_dict(), 201
+    #     except Exception:
+    #         return {"error": "Unable to create new flight."}, 400
 
 # admin only patch & delete
 class FlightByID(Resource):
@@ -148,18 +148,18 @@ class HotelsPath(Resource):
         return hotels, 200
 
 # admin only post 
-    def post(self):
-        try:
-            new_hotel = Hotel(
-                name=request.get_json()['name'],
-                city=request.get_json()['city'],
-                price=request.get_json()['price']
-            )
-            db.session.add(new_hotel)
-            db.session.commit()
-            return new_hotel.to_dict(), 201
-        except Exception:
-            return {"error": "Unable to create new hotel."}, 400
+    # def post(self):
+    #     try:
+    #         new_hotel = Hotel(
+    #             name=request.get_json()['name'],
+    #             city=request.get_json()['city'],
+    #             price=request.get_json()['price']
+    #         )
+    #         db.session.add(new_hotel)
+    #         db.session.commit()
+    #         return new_hotel.to_dict(), 201
+    #     except Exception:
+    #         return {"error": "Unable to create new hotel."}, 400
 
 # admin only patch & delete
 class HotelByID(Resource):
