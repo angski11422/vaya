@@ -1,9 +1,11 @@
-
+import TripCard from "./TripCard"
 
 export default function Trips() {
 
   return (
-    <div>Trips</div>
+    <>
+    <TripCard />  
+    </>
   )
 }
 

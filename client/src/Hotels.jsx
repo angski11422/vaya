@@ -4,7 +4,7 @@
 
 
 export default function Hotels(props) {
-    console.log(props)
+    
 // const [hotelData, setHotelData] = useState([])
 
     // useEffect(() => {

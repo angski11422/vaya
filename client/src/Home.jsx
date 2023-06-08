@@ -7,13 +7,22 @@ import { useRouteLoaderData } from "react-router-dom"
 
 export default function Home() {
     const allInfo = useRouteLoaderData('home')
-    console.log(allInfo)
+
+    function handleHotels(){
+        return <Hotels hotels={allInfo.hotels}/>
+    }
+    function handleFlights(){
+        <Flights flights={allInfo.flights}/>
+    }
+    function handleTrips(){
+        <Trips trips={allInfo.trips}/>
+    }
 
     return (
-        <>
-            <Hotels hotels={allInfo.hotels}/>
-            <Flights flights={allInfo.flights}/>
-            <Trips trips={allInfo.trips}/>
-        </>
+        <div>
+            <button onClick={handleHotels}>Check Out Hotels</button>
+            <button onClick={handleFlights}>Check Out Flights</button>
+            <button onClick={handleTrips}>Check Out Trips</button>
+        </div>
     )
 }

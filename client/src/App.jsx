@@ -20,16 +20,15 @@ export default function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path='/' element={<RootLayout user={user} setUser={setUser}/>} >
-                <Route path='/' element={<Home />} loader={getAll} id='home'>
-                    <Route path='/hotels' element={<Hotels /> }>
-                        <Route path="/hotels/:id" element={<HotelCard/>}/>
-                    </Route>
-                    <Route path='/flights' element={<Flights />}>
-                        <Route path='/flights/:id' element={<FlightCard />}/>
-                    </Route>
-                    <Route path='/trips' element={<Trips />}>
-                        <Route path='/trips/:id' element={<TripCard/>}/>
-                    </Route>
+                <Route path='/' element={<Home />} loader={getAll} id='home'/>
+                <Route path='/hotels' element={<Hotels /> }>
+                    <Route path="/hotels/:id" element={<HotelCard/>}/>
+                </Route>
+                <Route path='/flights' element={<Flights />}>
+                    <Route path='/flights/:id' element={<FlightCard />}/>
+                </Route>
+                <Route path='/trips' element={<Trips />}>
+                    <Route path='/trips/:id' element={<TripCard/>}/>
                 </Route>
                 <Route path='/signin' element={<SignIn setUser={setUser}/>}/>
             </Route>
