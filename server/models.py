@@ -1,9 +1,9 @@
 from sqlalchemy_serializer import SerializerMixin
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+import os
+from flask import current_app
 
 from config import *
 
@@ -16,14 +16,27 @@ class User(db.Model, SerializerMixin):
     serialize_rules = ('-updated_at', '-created_at', '-trips.user')
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
     city = db.Column(db.String)
+    email = db.Column(db.String, nullable=False)
+    birthday = db.Column(db.Date)
+    profile_photo = db.Column(db.String)
+    fav_destination = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now()) 
+    
 
     trips = db.relationship('Trip', backref='user')
+
+    def save_profile_photo(self, photo_file):
+        if photo_file:
+            filename = f'{self.id}.jpg'
+            photo_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            photo_file.save(photo_path)
+            self.profile_photo = photo_path
+
 
     @hybrid_property
     def password_hash(self):
@@ -83,3 +96,11 @@ class Trip(db.Model, SerializerMixin):
     total_price = db.Column(db.Numeric(scale=2))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    def calculate_total_price(self):
+        hotel = Hotel.query.get(self.hotel_id)
+        flight = Flight.query.get(self.flight_id)
+        if hotel is None or flight is None:
+            return None
+        self.total_price = hotel.price + flight.price
+        return self.total_price

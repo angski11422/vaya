@@ -29,7 +29,9 @@ if __name__ == '__main__':
                 name=fake.name(),
                 username=fake.user_name(),
                 _password_hash=fake.word(),
-                city=rc(cities)
+                city=rc(cities),
+                email=fake.email(),
+                birthday=fake.date_of_birth()
             )
             users.append(u)
 
@@ -69,11 +71,11 @@ if __name__ == '__main__':
         trips = []
         for i in range(10):
             t = Trip(
-                total_price=randint(100, 1000),
                 user_id=randint(1, 10),
                 hotel_id=randint(1, 10),
                 flight_id=randint(1, 10)
             )
+            t.calculate_total_price()
             trips.append(t)
  
         db.session.add_all(trips)
