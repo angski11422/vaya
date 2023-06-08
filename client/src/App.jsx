@@ -8,6 +8,7 @@ import Trips from './Trips'
 import TripCard from './TripCard'
 import HotelCard from './HotelCard'
 import FlightCard from './FlightCard'
+import SignIn from './SignIn'
 import { getAll } from './utils/loaders'
 // import { useParams } from 'react-router-dom'
 
@@ -28,12 +29,13 @@ export default function App() {
                         <Route path='/trips/:id' element={<TripCard/>}/>
                     </Route>
                 </Route>
+                <Route path='/signin' element={<SignIn />}/>
             </Route>
         )
     )
     
     return(
-        <div className="container">
+        <div>
             <RouterProvider router={router}/>
         </div>
     )
