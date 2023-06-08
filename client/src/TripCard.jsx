@@ -1,7 +1,10 @@
+/* eslint-disable react/prop-types */
 
-export default function TripCard() {
-  console.log("trip card")
+export default function TripCard({trip}) {
   return (
-    <div>TripCard</div>
+    <div>
+      <p>{trip.total_price}</p>
+      
+    </div>
   )
 }
