@@ -1,29 +1,35 @@
 import {useState, useEffect} from 'react';
 import SignIn from './SignIn';
 import UserPage from './UserPage';
-import { Link } from 'react-router-dom';
 
 
 
 
-export default function Header() {
-    const [user, setUser] = useState(null)
+
+export default function Header({user, setUser} ) {
+    // const [user, setUser] = useState(null)
     // const [isUserPage, setIsUserPage] = useState(false)
+    const [isModal, setIsModal] = useState(false)
 
-
+    
     useEffect(() => {
         fetch('/api/check_session')
         .then(r => r.json())
         .then(data => setUser(data))
     }, [])
 
-    function handleClick(){
+    function logOut(){
         return fetch('/api/logout', {
             method: 'DELETE'
         })
         .then(setUser(null))
-        // setIsUserPage(!isUserPage)
-        // return <UserPage />
+    }
+
+
+    if(isModal){
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
     }
 
     return (
@@ -55,13 +61,14 @@ export default function Header() {
                     </div>
                     <div className="user-nav__user">
                         {user ? (
-                            <div onClick={handleClick}>
+                            <div onClick={logOut}>
                                 <img src="{ url_for('static', filename=user.profile_photo) }" alt="Profile photo" className="user-nav__user-photo" />
                                 <span className="user-nav__user-name">NAME</span>
                             </div>
                         ) : (
-                            <Link to='/signin' className="user-nav__button">Sign In</Link>
-                            // <button className="user-nav__button"><SignIn setUser={setUser}/></button>
+                            <div  >
+                            {isModal ? <SignIn setUser={setUser} setIsModal={setIsModal} isModal={isModal} /> : <button className="user-nav__button" onClick={() => setIsModal(!isModal)}>Sign In</button>}
+                            </div>
                         )}
                     </div>
                 </nav>

@@ -1,12 +1,11 @@
 import {useState} from 'react';
-import { useLocation } from 'react-router-dom';
+
 /* eslint-disable */
 
-export default function SignIn({  }) {
+export default function SignIn({ setUser, setIsModal, isModal }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const location = useLocation();
-    const setUser = location.state;
+
 
 // login user
     function handleUsername(e){
@@ -25,6 +24,7 @@ export default function SignIn({  }) {
         })
         .then((r) => r.json())
         .then(data => setUser(data))
+        setIsModal(!isModal)
     }
 
 //signup user   
@@ -60,44 +60,44 @@ export default function SignIn({  }) {
         })
         .then((r) => r.json())
         .then(data => setUser(data))
-        console.log(new_user)
+        setIsModal(!isModal)
     }
 
     return (
         <>
-            <div className="modal__sign-in">
-                <div className="modal__overlay"></div> 
-                <div className="modal__content">
+            <div className="modal">
+                <div className="overlay"></div> 
+                <div className="modalContent">
                     <form className="model__form" onSubmit={handleSignIn}>
                         <div className="modal__header">
                             <h1>Sign In</h1>
-                            <button className="close">X</button>
+                            <button className="close" onClick={() => setIsModal(!isModal)}>X</button>
                         </div>
                         <div className="modal__inputs">
                             <label htmlFor='username'></label>
                             <input type="text" name="username" placeholder="username" value={username} onChange={handleUsername}></input>
                             <label htmlFor='password'></label>
                             <input type="text" name="password" placeholder="password" value={password} onChange={handlePassword}></input>
-                            <button type="submit">Sign In</button>
+                            <button type="submit" >Sign In</button>
                         </div>
                         <div className="or-line">
                             <div className="line"></div>
                             <div className="or">or</div>
                             <div className="line"></div>
                         </div>
-                        <div className="modal-footer">
+                        {/* <div className="modal-footer">
                             <button type="submit">New Here? Sign Up Now</button>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
-            </div> 
-            <div className="modal__sign_up">
-                <div className="modal-overlay"></div> 
+             {/* </div> */}
+            {/* <div className="modal__sign_up"> */}
+                <div className="overlay"></div> 
                 <div className="modal-content">
                     <form className="model-form" onSubmit={handleSignUp}>
                         <div className="modal-header">
                             <h1>Sign Up</h1>
-                            <button className="close">X</button>
+                            {/* <button className="close" onClick={() => setIsModal(!isModal)}>X</button> */}
                         </div>
                         <div className="modal__inputs">
                             <label htmlFor='name'></label>
@@ -116,7 +116,8 @@ export default function SignIn({  }) {
                         </div>
                     </form>
                 </div>
-            </div> 
+            {/* </div>  */}
+            </div>
         </>
     )
 }

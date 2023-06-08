@@ -2,11 +2,12 @@ import Header from './Header'
 import Nav from './Nav'
 import {Outlet} from 'react-router-dom'
 
-export default function RootLayout() {
+export default function RootLayout({user, setUser}) {
+    
     return (
     <div className="container">
         <div>
-            <Header />
+            <Header user={user} setUser={setUser}/>
         </div>
         <div className="content">
             <Nav />

@@ -15,12 +15,12 @@ from models import User, Flight, Hotel, Trip
 
 class Signup(Resource):
     def post(self):
-        username = request.get_json()['username']
-        password = request.get_json()['password']
-        city = request.get_json()['city']
-        name = request.get_json()['name']
-        email = request.get_json()['email']
-        photo_file = request.files['profile_photo']
+        username = request.form['username']
+        password = request.form['password']
+        city = request.form['city']
+        name = request.form['full_name']
+        email = request.form['email']
+        # photo_file = request.files['profile_photo']
 
         if username and password:
             new_user = User(username=username, city=city, name=name, email=email)
@@ -29,7 +29,7 @@ class Signup(Resource):
             db.session.add(new_user)
             db.session.commit()
 
-            new_user.save_profile_photo(photo_file)
+            # new_user.save_profile_photo(photo_file)
 
             session['user_id'] = new_user.id
 
@@ -67,25 +67,6 @@ class CheckSession(Resource):
         else:
             return None, 401
 
-
-class Signup(Resource):
-    def post(self):
-        username = request.get_json()['username']
-        password = request.get_json()['password']
-        city = request.get_json()['city']
-        name = request.get_json()['name']
-
-        if username and password:
-            new_user = User(username=username, city=city, name=name)
-            new_user.password_hash = password
-
-            db.session.add(new_user)
-            db.session.commit()
-
-            session['user_id'] = new_user.id
-
-            return new_user.to_dict(), 201
-        return None, 422
 
 
 class UsersPath(Resource):
