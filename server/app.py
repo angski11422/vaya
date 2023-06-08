@@ -21,17 +21,19 @@ class Login(Resource):
 
         user = User.query.filter(
             User.username == username).first()
+        print(request.get_json())
 
         if user.authenticate(password):
             session['user_id'] = user.id
+            print(user.id)
             return user.to_dict(), 200
-        return {}, 401
+        return None, 401
 
 
 class Logout(Resource):
     def delete(self):
         session['user_id'] = None
-        return {}, 204
+        return None, 204
 
 
 class CheckSession(Resource):
@@ -41,7 +43,7 @@ class CheckSession(Resource):
             user = User.query.filter(User.id == user_id).first()
             return user.to_dict()
         else:
-            return {}, 401
+            return None, 401
 
 
 class Signup(Resource):
@@ -61,7 +63,7 @@ class Signup(Resource):
             session['user_id'] = new_user.id
 
             return new_user.to_dict(), 201
-        return {}, 422
+        return None, 422
 
 
 class UsersPath(Resource):

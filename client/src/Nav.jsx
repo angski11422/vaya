@@ -1,41 +1,40 @@
-import React from 'react';
-
+import {NavLink} from 'react-router-dom'
 
 export default function Nav() {
     return (
         <nav className="sidebar">
                     <ul className="side-nav">
                         <li className="side-nav__item">
-                            <a className="side-nav__link" href="#">
+                            <NavLink to='/' className="side-nav__link" href="#">
+                                <svg className="side-nav__icon">
+                                    <use xlinkHref="src/img/sprite.svg#icon-key"></use>
+                                </svg>
+                                <span>Home</span>
+                            </NavLink>
+                        </li>
+                        <li className="side-nav__item">
+                            <NavLink to='/hotels' className="side-nav__link">
                                 <svg className="side-nav__icon">
                                     <use xlinkHref="src/img/sprite.svg#icon-home"></use>
                                 </svg>
                                 <span>Hotels</span>
-                            </a>
+                            </NavLink>
                         </li>
                         <li className="side-nav__item">
-                            <a className="side-nav__link" href="#">
+                            <NavLink to='/flights' className="side-nav__link" href="#">
                                 <svg className="side-nav__icon">
                                     <use xlinkHref="src/img/sprite.svg#icon-aircraft-take-off"></use>
                                 </svg>
                                 <span>Flights</span>
-                            </a>
+                            </NavLink>
                         </li>
                         <li className="side-nav__item">
-                            <a className="side-nav__link" href="#">
-                                <svg className="side-nav__icon">
-                                    <use xlinkHref="src/img/sprite.svg#icon-key"></use>
-                                </svg>
-                                <span>Car Rental</span>
-                            </a>
-                        </li>
-                        <li className="side-nav__item">
-                            <a className="side-nav__link" href="#">
+                            <NavLink to='/trips' className="side-nav__link" href="#">
                                 <svg className="side-nav__icon">
                                     <use xlinkHref="src/img/sprite.svg#icon-map"></use>
                                 </svg>
-                                <span>Tours</span>
-                            </a>
+                                <span>Your Trips</span>
+                            </NavLink>
                         </li>
                     </ul>
                     <div className="copyright">

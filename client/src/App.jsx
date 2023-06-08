@@ -1,19 +1,22 @@
-import React from 'react'
-import Header from './Header';
-import Nav from './Nav';
-import Content from './Content';
+import Home from './Home'
+import RootLayout from './RootLayout'
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom'
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path='/' element={<RootLayout />}>
+            <Route index element={<Home />}/>
+        </Route>
+    )
+)
 
 export default function App() {
-  
-
     return(
         <div className="container">
-            <Header />
-            <Nav />
-            <Content />
+            <RouterProvider router={router}/>
         </div>
     )
-
-
 }
+
+
 

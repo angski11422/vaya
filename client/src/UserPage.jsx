@@ -1,4 +1,3 @@
-import React from 'react';
 
 
 export default function UserPage() {
@@ -7,7 +6,14 @@ export default function UserPage() {
 
     return (
         <>
-         <h1>Hello World!</h1>
+            <div>
+                <h1>Welcome -Name-!</h1>
+                <img></img>
+                <p>Username:</p>
+                <p>Bday:</p>
+                <p>City:</p>
+                <p>Favorite Destination</p>
+            </div>
         </>
     )
 }
