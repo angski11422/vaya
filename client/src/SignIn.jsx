@@ -14,7 +14,8 @@ export default function SignIn({ setUser }) {
         setPassword(e.target.value)
     }
 
-    function handleSubmit(){
+    function handleSubmit(e){
+        e.preventDefault()
         fetch('/api/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

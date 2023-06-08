@@ -1,25 +1,25 @@
-import{ useState, useEffect } from 'react';
-import HotelCard from './HotelCard';
+// import{ useState, useEffect } from 'react';
+// import HotelCard from './HotelCard';
 
 
 
-export default function Hotels() {
+export default function Hotels(props) {
+    console.log(props)
+// const [hotelData, setHotelData] = useState([])
 
-const [hotelData, setHotelData] = useState([])
+    // useEffect(() => {
+    //     fetch('/api/hotels')
+    //     .then((res) => res.json())
+    //     .then((data) => setHotelData(data))
+    // }, [])
 
-    useEffect(() => {
-        fetch('/api/hotels')
-        .then((res) => res.json())
-        .then((data) => setHotelData(data))
-    }, [])
-
-    const hotelList = hotelData.map((hotel) => {
-        return <HotelCard key={hotel.id} hotel={hotel}/>
-    })
+    // const hotelList = hotelData.map((hotel) => {
+    //     return <HotelCard key={hotel.id} hotel={hotel}/>
+    // })
 
     return (
         <>
-         <div>{[hotelList]}</div>
+         {/* <div>{[hotelList]}</div> */}
         </>
     )
 }
