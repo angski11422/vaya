@@ -5,13 +5,6 @@ import EditUser from "./EditUser";
 export default function UserPage({user, setUser, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
     
     
-    function formatDate(dateString) {
-        const options = { month: 'long', day: 'numeric' };
-        const date = new Date(dateString);
-        {dateString ? date.toLocaleString('en-US', options) : '' };
-      }
-
-
     function deleteProfile() {
         fetch(`/api/users/${user.id}` , {
             method: 'DELETE',
@@ -28,7 +21,7 @@ export default function UserPage({user, setUser, showEditForm, setShowEditForm, 
                         <h1>Welcome {user.name}-!</h1>
                         <img src={user.profile_photo} alt="profile photo"/>
                         <p>Username: {user.username}</p>
-                        <p>Bday: {formatDate(user.birthday)}</p>
+                        <p>Bday: {user.birthday}</p>
                         <p>City: {user.city}</p>
                         <p>Favorite Destination: {user.fav_destination}</p>
                     </div>

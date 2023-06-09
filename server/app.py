@@ -15,7 +15,6 @@ from models import User, Flight, Hotel, Trip
 
 class Signup(Resource):
     def post(self):
-        print(request.get_json())
         username = request.get_json()['username']
         password = request.get_json()['password']
         city = request.get_json()['city']
@@ -91,9 +90,16 @@ class UserByID(Resource):
             user = User.query.filter(User.id == id).first()
             if user == None:
                 return {'error': 'User not found'}, 404
-            print (request.json()[attr])
-            for attr in request.get_json():
-                setattr(user, attr, request.get_json()[attr])
+            data = request.get_json()
+         
+            for attr, value in data.items():
+                if value:
+                    if attr == "birthday":
+                        new_date = (datetime.strptime(value, '%Y-%m-%d').date())
+                        setattr(user, attr, new_date)
+                    else:
+                        setattr(user, attr, value)
+                
             db.session.add(user)
             db.session.commit()
             return user.to_dict(), 200

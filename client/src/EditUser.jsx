@@ -3,7 +3,7 @@ import { useState } from "react"
 
 
 
-export default function EditUser({user, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
+export default function EditUser({user, setUser, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
 
     const [formData, setFormData] =useState({
         full_name: "",
@@ -38,6 +38,7 @@ export default function EditUser({user, showEditForm, setShowEditForm, showUserP
               console.error('Failed to update profile');
             }
           })
+          .then(data => setUser(data))
           .catch((err) => {
             console.error('User not found', err);
           });
@@ -47,7 +48,7 @@ export default function EditUser({user, showEditForm, setShowEditForm, showUserP
     }
 
 return (
-    <form onSubmit={editProfile}>
+    <form onSubmit={editProfile} onClick={() => setShowEditForm(!showEditForm)}>
         <div className="modal__inputs">
             <label htmlFor='name'></label>
             <input type="text" name="full_name" placeholder="full name" value={FormData.full_name} onChange={handleChange}></input>
