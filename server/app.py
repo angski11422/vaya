@@ -15,7 +15,6 @@ from models import User, Flight, Hotel, Trip
 
 class Signup(Resource):
     def post(self):
-        print(request.get_json())
         username = request.get_json()['username']
         password = request.get_json()['password']
         city = request.get_json()['city']
