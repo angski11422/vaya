@@ -1,8 +1,7 @@
+/* eslint-disable react/prop-types */
 
 
-
-
-export default function FlightCard({ flight}) {
+export default function FlightCard({flight}) {
     function formatDate(dateString) {
         const options = { month: 'long', day: 'numeric' };
         const date = new Date(dateString);
