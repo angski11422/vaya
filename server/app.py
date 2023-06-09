@@ -63,9 +63,12 @@ class CheckSession(Resource):
         user_id = session.get('user_id')
         if user_id:
             user = User.query.filter(User.id == user_id).first()
-            return user.to_dict()
+            if user:
+                return user.to_dict()
+            else:
+                return None
         else:
-            return None, 401
+            return {"message": "User not logged in"}, 401
 
 
 
@@ -100,7 +103,7 @@ class UserByID(Resource):
                 db.session.commit()
                 return user.to_dict(), 200
         except Exception:
-            return {"error": "Unable to update trip."}, 404
+            return {"error": "Unable to update user."}, 404
     
     def delete(self, id):
         try:

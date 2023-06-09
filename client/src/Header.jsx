@@ -1,25 +1,29 @@
 import {useState, useEffect} from 'react';
 import SignIn from './SignIn';
 import UserPage from './UserPage';
+import EditUser from './EditUser';
 
 
 
 
 
 export default function Header({user, setUser} ) {
-    // const [user, setUser] = useState(null)
-    // const [isUserPage, setIsUserPage] = useState(false)
+    const [showUserPage, setShowUserPage] = useState(false)
     const [isModal, setIsModal] = useState(false)
+    const [showEditForm, setShowEditForm] = useState(false)
 
     
     useEffect(() => {
         fetch('/api/check_session')
         .then(r => r.json())
         .then(data => setUser(data))
+        .catch(err => {
+            setUser(null)
+        });
     }, [])
 
     function logOut(){
-        return fetch('/api/logout', {
+        fetch('/api/logout', {
             method: 'DELETE'
         })
         .then(setUser(null))
@@ -47,30 +51,26 @@ export default function Header({user, setUser} ) {
                 </form>
 
                 <nav className="user-nav">
-                    <div className="user-nav__icon-box">
-                        <svg className="user-nav__icon">
-                            <use xlinkHref="src/img/sprite.svg#icon-bookmark"></use>
-                        </svg>
-                        <span className="user-nav__notification">0</span>
-                    </div>
-                    <div className="user-nav__icon-box">
-                        <svg className="user-nav__icon">
-                            <use xlinkHref="src/img/sprite.svg#icon-chat"></use>
-                        </svg>
-                        <span className="user-nav__notification">0</span>
-                    </div>
-                    <div className="user-nav__user">
-                        {user ? (
-                            <div onClick={logOut}>
-                                <img src={user.profile_photo} alt="Profile photo" className="user-nav__user-photo" />
-                                <span className="user-nav__user-name">{user.name}</span>
-                            </div>
-                        ) : (
-                            <div  >
-                            {isModal ? <SignIn setUser={setUser} setIsModal={setIsModal} isModal={isModal} /> : <button className="user-nav__button" onClick={() => setIsModal(!isModal)}>Sign In</button>}
-                            </div>
+                   {user ? (
+                    <>
+                        <div className="user-nav__icon-box">
+                            <button className="user-nav__button" onClick={logOut}>Log Out</button> 
+                        </div>
+                        <div>
+                            {showUserPage ? 
+                            <div>
+                                <UserPage user={user} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setShowUserPage={setShowUserPage} showUserPage={showUserPage}/>
+                            </div> : (
+                                <div className="user-nav__user" onClick={() => setShowUserPage(!showUserPage)}>
+                                    <img src={user.profile_photo} alt="Profile photo" className="user-nav__user-photo" />
+                                    <span className="user-nav__user-name">{user.name}</span>
+                                </div>)}
+                        </div>
+                    </>) : (
+                        <div  >
+                        {isModal ? <SignIn setUser={setUser} setIsModal={setIsModal} isModal={isModal} /> : <button className="user-nav__button" onClick={() => setIsModal(!isModal)}>Sign In</button>}
+                        </div>
                         )}
-                    </div>
                 </nav>
             </header>
         </>

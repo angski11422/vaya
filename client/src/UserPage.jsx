@@ -1,18 +1,42 @@
+import { useState } from "react";
+import EditUser from "./EditUser";
 
 
-export default function UserPage() {
+export default function UserPage({user, setUser, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
+    
+    
+    function formatDate(dateString) {
+        const options = { month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        {dateString ? date.toLocaleString('en-US', options) : '' };
+      }
 
 
+    function deleteProfile() {
+        fetch(`/api/users/${user.id}` , {
+            method: 'DELETE',
+        })
+        .then(setUser(null))
+    }
 
     return (
         <>
-            <div>
-                <h1>Welcome -Name-!</h1>
-                <img></img>
-                <p>Username:</p>
-                <p>Bday:</p>
-                <p>City:</p>
-                <p>Favorite Destination</p>
+            <div className="user-page">
+                {showEditForm ? <EditUser user={user} setUser={setUser} showEditForm={showEditForm} setShowEditForm={setShowEditForm} showUserPage={showUserPage} setShowUserPage={setShowUserPage}/> :
+                <div>
+                    <div className="user-page__box" onClick={() => setShowUserPage(!showUserPage)} >
+                        <h1>Welcome {user.name}-!</h1>
+                        <img src={user.profile_photo} alt="profile photo"/>
+                        <p>Username: {user.username}</p>
+                        <p>Bday: {formatDate(user.birthday)}</p>
+                        <p>City: {user.city}</p>
+                        <p>Favorite Destination: {user.fav_destination}</p>
+                    </div>
+                    <div className="user-page__buttons">
+                        <button className="user-nav__button" onClick={() => setShowEditForm(!showEditForm)}>Edit Profile</button>
+                        <button onClick={deleteProfile} className="user-nav__button">Delete Profile</button>
+                    </div>
+                </div>}
             </div>
         </>
     )

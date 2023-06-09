@@ -45,7 +45,7 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
     } 
     function handleSignUp(e){
         e.preventDefault()
-        const new_user = {
+        const newUser = {
             full_name: formData.full_name,
             city: formData.city,
             username: formData.username,
@@ -56,7 +56,7 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
         fetch('/api/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(new_user)
+            body: JSON.stringify(newUser)
         })
         .then((r) => r.json())
         .then(data => setUser(data))

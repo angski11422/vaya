@@ -9,6 +9,8 @@ import TripCard from './TripCard'
 import HotelCard from './HotelCard'
 import FlightCard from './FlightCard'
 import SignIn from './SignIn'
+import UserPage from './UserPage'
+import EditUser from './EditUser'
 import { getAll } from './utils/loaders'
 import { useState } from 'react'
 // import { useParams } from 'react-router-dom'
@@ -31,6 +33,9 @@ export default function App() {
                     <Route path='/trips/:id' element={<TripCard/>}/>
                 </Route>
                 <Route path='/signin' element={<SignIn setUser={setUser}/>}/>
+                <Route path='/userpage' element={<UserPage user={user}/>}/>
+                <Route path='/edituser' element={<EditUser user={user}/>}/>
+
             </Route>
         )
     )

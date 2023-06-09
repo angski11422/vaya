@@ -30,7 +30,12 @@ class User(db.Model, SerializerMixin):
 
     trips = db.relationship('Trip', backref='user')
 
-
+    @validates('email')
+    def validate_email(self, key, address):
+        if '@' not in address:
+            raise ValueError("Must enter a valid email")
+        return address
+    
     @hybrid_property
     def password_hash(self):
         raise Exception('Password hashes may not be viewed')
