@@ -14,8 +14,8 @@ export default function UserPage({user, setUser, showEditForm, setShowEditForm, 
 
     return (
         <>
-            <div className={((showEditForm) ? "modal:active": "modal")}>
-                <div className={"modal__background"}></div>    
+            <div className="modal">
+                <div className="modal__background"></div>    
                 {showEditForm ? <EditUser user={user} setUser={setUser} showEditForm={showEditForm} setShowEditForm={setShowEditForm} showUserPage={showUserPage} setShowUserPage={setShowUserPage}/> :
                 <div>
                     <div className="modal__content">

@@ -16,7 +16,7 @@ export default function Home() {
     const hotelList = hotels.slice(0,2)
     const hotelInfo = hotelList.map((hotel) => {
         return (<div key={hotel.id}>
-            <img src={hotel.image}></img>
+            <img className="photos" src={hotel.image}></img>
             <p>{hotel.name}</p>
             <p>{hotel.city}</p>
             <p>${hotel.price}</p>

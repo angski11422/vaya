@@ -49,7 +49,7 @@ export default function Header({user, setUser} ) {
                         <div className="user-nav__icon-box">
                             <button className="user-nav__button" onClick={logOut}>Log Out</button> 
                         </div>
-                        <div>
+                        <div className="modal">
                             {showUserPage ? 
                             <div>
                                 <UserPage user={user} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setShowUserPage={setShowUserPage} showUserPage={showUserPage}/>

@@ -202,38 +202,19 @@ body {
   flex: 1;
   height: 80rem; }
 
-.modal__background {
-  height: 6rem;
-  width: 6rem;
-  border-radius: 50%;
-  position: fixed;
-  top: 6.5rem;
-  right: 6.5rem;
-  background-image: var(--color-grey-dark-1);
-  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+.modal {
+  display: block;
+  /* Hidden by default */
+  z-index: 1;
+  /* Sit on top */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  /* Enable scroll if needed */
+  background-color: var(--color-grey-dark-1);
+  color: var(--color-grey-light-1); }
 
-.modal .__content {
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 6500;
-  opacity: 0;
-  width: 0;
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-
-.modal__user {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  list-style: none;
-  text-align: center;
-  width: 100%; }
-
-.modal:active ~ .modal__background {
-  transform: scale(80); }
-
-.modal:active ~ .modal__content {
-  opacity: 1;
-  width: 100%; }
+.photos {
+  width: 3rem;
+  height: 3rem; }
