@@ -91,17 +91,12 @@ class UserByID(Resource):
             user = User.query.filter(User.id == id).first()
             if user == None:
                 return {'error': 'User not found'}, 404
-            
-            photo_file = request.files['profile_photo']
-            if photo_file:
-                user.save_profile_photo(photo_file)
-                db.session.commit()
-            else:
-                for attr in request.get_json():
-                    setattr(user, attr, request.get_json()[attr])
-                db.session.add(user)
-                db.session.commit()
-                return user.to_dict(), 200
+            print (request.json()[attr])
+            for attr in request.get_json():
+                setattr(user, attr, request.get_json()[attr])
+            db.session.add(user)
+            db.session.commit()
+            return user.to_dict(), 200
         except Exception:
             return {"error": "Unable to update user."}, 404
     

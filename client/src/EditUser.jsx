@@ -3,7 +3,7 @@ import { useState } from "react"
 
 
 
-export default function EditUser({user, setUser, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
+export default function EditUser({user, showEditForm, setShowEditForm, showUserPage, setShowUserPage}) {
 
     const [formData, setFormData] =useState({
         full_name: "",
@@ -25,23 +25,23 @@ export default function EditUser({user, setUser, showEditForm, setShowEditForm, 
 
     function editProfile(e) {
         e.preventDefault()
-        // const updateProfile = {
-        //     full_name: formData.full_name,
-        //     city: formData.city,
-        //     username: formData.username,
-        //     password: formData.password,
-        //     email: formData.email,
-        //     profile_photo: formData.profile_photo,
-        //     birthday: formData.birthday,
-        //     fav_destination: formData.fav_destination
-        // }
-        // fetch(`/api/users/${user.id}`, {
-        //     method: 'PATCH',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify(updateProfile)
-        // })
-        // .then(res => res.json())
-        // .then(data => setUser(data));
+        console.log(formData)
+        fetch(`/api/users/${user.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+        })
+        .then((res) => {
+            if (res.ok) {
+              console.log('Profile updated successfully!');
+            } else {
+              console.error('Failed to update profile');
+            }
+          })
+          .catch((err) => {
+            console.error('User not found', err);
+          });
+  
         setShowEditForm(!showEditForm)
         setShowUserPage(!showUserPage)
     }

@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import SignIn from './SignIn';
 import UserPage from './UserPage';
-import EditUser from './EditUser';
 
 
 
