@@ -91,9 +91,20 @@ class UserByID(Resource):
             user = User.query.filter(User.id == id).first()
             if user == None:
                 return {'error': 'User not found'}, 404
-            print (request.json()[attr])
-            for attr in request.get_json():
-                setattr(user, attr, request.get_json()[attr])
+            data = request.get_json()
+         
+            for attr, value in data.items():
+                # user.password_hash = data.password
+                
+                if value:
+                    if attr == "birthday":
+                        print("hello")
+                        new_date = (datetime.strptime(value, '%Y-%m-%d').date())
+                        setattr(user, attr, new_date)
+                    else:
+                        setattr(user, attr, value)
+                
+            print(type(user.birthday))
             db.session.add(user)
             db.session.commit()
             return user.to_dict(), 200
