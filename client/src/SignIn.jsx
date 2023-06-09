@@ -67,23 +67,23 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
         <>
             <div className="modal">
                 <div className="overlay"></div> 
-                <div className="modalContent">
-                    <form className="model__form" onSubmit={handleSignIn}>
+                <div className="modal-content">
+                    <form className="form-modal" onSubmit={handleSignIn}>
                         <div className="modal__header">
                             <h1>Sign In</h1>
-                            <button className="close" onClick={() => setIsModal(!isModal)}>X</button>
+                            <button className="user-nav__button-close" onClick={() => setIsModal(!isModal)}>X</button>
                         </div>
-                        <div className="modal__inputs">
-                            <label htmlFor='username'></label>
-                            <input type="text" name="username" placeholder="username" value={username} onChange={handleUsername}></input>
-                            <label htmlFor='password'></label>
-                            <input type="text" name="password" placeholder="password" value={password} onChange={handlePassword}></input>
-                            <button type="submit" >Sign In</button>
+                        <div className="form-modal__group">
+                            <label className="form-modal__label" htmlFor='username'></label>
+                            <input className="form-modal__input" type="text" name="username" placeholder="username" value={username} onChange={handleUsername}></input>
+                            <label className="form-modal__label"htmlFor='password'></label>
+                            <input className="form-modal__input" type="text" name="password" placeholder="password" value={password} onChange={handlePassword}></input>
+                            <button className="user-nav__button" type="submit" >Sign In</button>
                         </div>
                         <div className="or-line">
-                            <div className="line"></div>
-                            <div className="or">or</div>
-                            <div className="line"></div>
+                            <div className="or-line__line"></div>
+                            <div className="or-line__or">or</div>
+                            <div className="or-line__line"></div>
                         </div>
                         {/* <div className="modal-footer">
                             <button type="submit">New Here? Sign Up Now</button>
@@ -94,25 +94,25 @@ export default function SignIn({ setUser, setIsModal, isModal }) {
             {/* <div className="modal__sign_up"> */}
                 <div className="overlay"></div> 
                 <div className="modal-content">
-                    <form className="model-form" onSubmit={handleSignUp}>
+                    <form className="form-modal" onSubmit={handleSignUp}>
                         <div className="modal-header">
                             <h1>Sign Up</h1>
                             {/* <button className="close" onClick={() => setIsModal(!isModal)}>X</button> */}
                         </div>
-                        <div className="modal__inputs">
-                            <label htmlFor='name'></label>
-                            <input type="text" name="full_name" placeholder="full name" value={FormData.full_name} onChange={handleChange}></input>
-                            <label htmlFor='city'></label>
-                            <input type="text" name="city" placeholder="city" value={FormData.city} onChange={handleChange}></input>
-                            <label htmlFor='username'></label>
-                            <input type="text" name="username" placeholder="username" value={FormData.username} onChange={handleChange}></input>
-                            <label htmlFor='password'></label>
-                            <input type="text" name="password" placeholder="password" value={FormData.password} onChange={handleChange}></input>
-                            <label htmlFor='email'></label>
-                            <input type="email" name="email" placeholder="email" value={FormData.email} onChange={handleChange}></input>
-                            <label htmlFor="profile_photo"></label>
-                            <input type="text" placeholder="profile_photo" name="profile_photo" value={FormData.profile_photo} onChange={handleChange}></input>
-                            <button type="submit">Sign Up</button>
+                        <div className="form-modal__group">
+                            <label className="form-modal__label" htmlFor='name'></label>
+                            <input className="form-modal__input" type="text" name="full_name" placeholder="full name" value={FormData.full_name} onChange={handleChange}></input>
+                            <label className="form-modal__label" htmlFor='city'></label>
+                            <input className="form-modal__input" type="text" name="city" placeholder="city" value={FormData.city} onChange={handleChange}></input>
+                            <label className="form-modal__label" htmlFor='username'></label>
+                            <input className="form-modal__input" type="text" name="username" placeholder="username" value={FormData.username} onChange={handleChange}></input>
+                            <label className="form-modal__label" htmlFor='password'></label>
+                            <input className="form-modal__input" type="text" name="password" placeholder="password" value={FormData.password} onChange={handleChange}></input>
+                            <label className="form-modal__label" htmlFor='email'></label>
+                            <input className="form-modal__input" type="email" name="email" placeholder="email" value={FormData.email} onChange={handleChange}></input>
+                            <label className="form-modal__label" htmlFor="profile_photo"></label>
+                            <input className="form-modal__input" type="text" placeholder="profile_photo" name="profile_photo" value={FormData.profile_photo} onChange={handleChange}></input>
+                            <button className="user-nav__button" type="submit">Sign Up</button>
                         </div>
                     </form>
                 </div>

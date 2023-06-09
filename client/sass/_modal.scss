@@ -1,28 +1,48 @@
-body.active-modal {
-    overflow-y: hidden;
-    z-index: 1000;
+
+
+.modal {
+    &__background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: var(--color-grey-dark-1);
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    .__content {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 6500;
+    
+        opacity: 0;
+        width: 0;
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    &__user {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        list-style: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    &:active ~ &__background {
+        transform: scale(80);
+    }
+ 
+    &:active ~ &__content {
+        opacity: 1;
+        width: 100%;
+    }
 }
 
 
-.modal, .overlay {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    background: rgba(49,49,49,0.8);
-}
 
-.modalContent {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    padding: 3em;
-    border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
-}

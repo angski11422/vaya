@@ -29,12 +29,6 @@ export default function Header({user, setUser} ) {
     }
 
 
-    if(isModal){
-        document.body.classList.add('active-modal')
-    } else {
-        document.body.classList.remove('active-modal')
-    }
-
     return (
         <>
             <header className="header">
