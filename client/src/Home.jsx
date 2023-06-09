@@ -16,7 +16,7 @@ export default function Home() {
     const hotelList = hotels.slice(0,2)
     const hotelInfo = hotelList.map((hotel) => {
         return (<div key={hotel.id}>
-            <img className="photos" src={hotel.image}></img>
+            <img className='photos' src={hotel.image}></img>
             <p>{hotel.name}</p>
             <p>{hotel.city}</p>
             <p>${hotel.price}</p>
@@ -25,7 +25,7 @@ export default function Home() {
 
     const flightList = flights.slice(2,4)
     const flightInfo = flightList.map((flight) => {
-        return (<div key={flight.id}>
+        return (<div className="flight" key={flight.id}>
             <h4>Flight</h4>
             <p>To: {flight.arrival_city}</p>
             <p>From: {flight.departure_city}</p>
@@ -36,9 +36,13 @@ export default function Home() {
    
 
     return (
-        <div>
-            {hotelInfo}
-            {flightInfo} 
+        <div className="home-container">
+            <div className="hotel-container">
+                {hotelInfo}
+            </div>
+            <div className="flight-container">
+                {flightInfo}
+            </div> 
         </div>
     )
 }
