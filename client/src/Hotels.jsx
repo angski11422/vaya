@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 
 import HotelCard from './HotelCard';
+import { useRouteLoaderData } from "react-router-dom"
 
 
 
-export default function Hotels(hotels) {
+
+export default function Hotels() {
+    const allInfo = useRouteLoaderData('hotels')
+    const hotels = allInfo.hotels
+    console.log(hotels)
     
 // const [hotelData, setHotelData] = useState([])
 

@@ -1,28 +1,18 @@
-import Hotels from './Hotels';
-import Flights from './Flights';
-import Trips from './Trips';
+/* eslint-disable no-unused-vars */
 import { useRouteLoaderData } from "react-router-dom"
-
 
 
 export default function Home() {
     const allInfo = useRouteLoaderData('home')
+    const hotels = allInfo.hotels
+    const flights = allInfo.flights
 
-    function handleHotels(){
-        return <Hotels hotels={allInfo.hotels}/>
-    }
-    function handleFlights(){
-        <Flights flights={allInfo.flights}/>
-    }
-    function handleTrips(){
-        <Trips trips={allInfo.trips}/>
-    }
 
     return (
         <div>
-            <button onClick={handleHotels}>Check Out Hotels</button>
-            <button onClick={handleFlights}>Check Out Flights</button>
-            <button onClick={handleTrips}>Check Out Trips</button>
+            Hello
+            {/* {hotels[0]}
+            {flights[0]} */}
         </div>
     )
 }

@@ -21,13 +21,13 @@ export default function App() {
         createRoutesFromElements(
             <Route path='/' element={<RootLayout user={user} setUser={setUser}/>} >
                 <Route path='/' element={<Home />} loader={getAll} id='home'/>
-                <Route path='/hotels' element={<Hotels /> }>
+                <Route path='/hotels' element={<Hotels /> } loader={getAll} id='hotels'>
                     <Route path="/hotels/:id" element={<HotelCard/>}/>
                 </Route>
-                <Route path='/flights' element={<Flights />}>
+                <Route path='/flights' element={<Flights />} loader={getAll} id='flights'>
                     <Route path='/flights/:id' element={<FlightCard />}/>
                 </Route>
-                <Route path='/trips' element={<Trips />}>
+                <Route path='/trips' element={<Trips />} loader={getAll} id='trips'>
                     <Route path='/trips/:id' element={<TripCard/>}/>
                 </Route>
                 <Route path='/signin' element={<SignIn setUser={setUser}/>}/>
