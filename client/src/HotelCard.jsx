@@ -9,8 +9,6 @@ export default function HotelCard({ hotel}) {
     }
 
     return (
-        <div>
-            <img src="../public/Honolulu.jpg"></img>
         <div onClick={handleClick}>
             <img src={hotel.image}></img>
             <h1>{hotel.name}</h1>
