@@ -59,9 +59,9 @@ if __name__ == '__main__':
         print("Creating Trips...")
 
         trips = []
-        for i in range(10):
+        for i in range(5):
             t = Trip(
-                user_id=randint(1, 10),
+                user_id=randint(1, 2),
                 hotel_id=randint(1, 10),
                 flight_id=randint(1, 10)
             )

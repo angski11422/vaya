@@ -36,6 +36,12 @@ class User(db.Model, SerializerMixin):
             raise ValueError("Must enter a valid email")
         return address
     
+    @validates('username')
+    def validate_username(self, key, username):
+        if 4 <= username <= 18:
+            raise ValueError("Username must be between 4 and 18 characters")
+        return username
+    
     @hybrid_property
     def password_hash(self):
         raise Exception('Password hashes may not be viewed')
