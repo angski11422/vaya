@@ -94,17 +94,13 @@ class UserByID(Resource):
             data = request.get_json()
          
             for attr, value in data.items():
-                # user.password_hash = data.password
-                
                 if value:
                     if attr == "birthday":
-                        print("hello")
                         new_date = (datetime.strptime(value, '%Y-%m-%d').date())
                         setattr(user, attr, new_date)
                     else:
                         setattr(user, attr, value)
                 
-            print(type(user.birthday))
             db.session.add(user)
             db.session.commit()
             return user.to_dict(), 200
