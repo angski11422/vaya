@@ -38,7 +38,7 @@ class User(db.Model, SerializerMixin):
     
     @validates('username')
     def validate_username(self, key, username):
-        if 4 <= username <= 18:
+        if 4 > len(username) > 18:
             raise ValueError("Username must be between 4 and 18 characters")
         return username
     

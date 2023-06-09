@@ -34,17 +34,17 @@ export default function Header({user, setUser} ) {
             <header className="header">
                 <img src="src/img/logo.png" alt="vaya logo" className="logo" />
 
-                {/* <form action="#" className="search">
+                <form action="#" className="search">
                     <input type="text" className="search__input" placeholder="Search" />
                     <button className="search__button">
                         <svg className="search__icon">
                             <use xlinkHref="src/img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
-                </form> */}
+                </form>
 
                 <nav className="user-nav">
-                   {user == !null ? (
+                   {user ? (
                     <>
                         <div className="user-nav__icon-box">
                             <button className="user-nav__button" onClick={logOut}>Log Out</button> 
