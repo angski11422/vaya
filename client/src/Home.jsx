@@ -7,12 +7,38 @@ export default function Home() {
     const hotels = allInfo.hotels
     const flights = allInfo.flights
 
+    function formatDate(dateString) {
+        const options = { month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleString('en-US', options);
+      }
+
+    const hotelList = hotels.slice(0,2)
+    const hotelInfo = hotelList.map((hotel) => {
+        return (<div key={hotel.id}>
+            <img src={hotel.image}></img>
+            <p>{hotel.name}</p>
+            <p>{hotel.city}</p>
+            <p>${hotel.price}</p>
+            </div>)
+    })
+
+    const flightList = flights.slice(2,4)
+    const flightInfo = flightList.map((flight) => {
+        return (<div key={flight.id}>
+            <h4>Flight</h4>
+            <p>To: {flight.arrival_city}</p>
+            <p>From: {flight.departure_city}</p>
+            <p>Leaving on: {formatDate(flight.departure_day)}</p>
+            <p>${flight.price}</p>
+            </div>)
+    })
+   
 
     return (
         <div>
-            Hello
-            {/* {hotels[0]}
-            {flights[0]} */}
+            {hotelInfo}
+            {flightInfo} 
         </div>
     )
 }
