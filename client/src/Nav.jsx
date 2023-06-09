@@ -33,7 +33,7 @@ export default function Nav() {
                                 <svg className="side-nav__icon">
                                     <use xlinkHref="src/img/sprite.svg#icon-map"></use>
                                 </svg>
-                                <span>Your Trips</span>
+                                <span>Trips</span>
                             </NavLink>
                         </li>
                     </ul>
