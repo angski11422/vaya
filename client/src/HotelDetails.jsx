@@ -7,7 +7,7 @@ export default function HotelDetails() {
 
     return (
         <div >
-            <img src={hotel.image}></img>
+            <img className='photos' src={hotel.image}></img>
             <h1>{hotel.name}</h1>
             <h2>{hotel.city}</h2>
             <p>${hotel.price}</p>
