@@ -18,8 +18,9 @@ export default function FlightCard({flight}) {
     return (
         <>
             <div onClick={handleClick}>
-                <h1>{flight.departure_city}</h1>
-                <h3>{formatDate(flight.departure_day)}</h3>
+                <h1>To: {flight.arrival_city}</h1>
+                <h1>From: {flight.departure_city}</h1>
+                <h3>Leaving on: {formatDate(flight.departure_day)}</h3>
                 <h4>${flight.price}</h4>
             </div>
         </>

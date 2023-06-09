@@ -12,11 +12,11 @@ export default function FlightCard() {
       }
 
     return (
-        <>
-            <h1>{flight.departure_city}</h1>
-            <h3>{formatDate(flight.departure_day)}</h3>
-            <h4>${flight.price}</h4>
-        </>
-
+            <div>
+                <h1>To: {flight.arrival_city}</h1>
+                <h1>From: {flight.departure_city}</h1>
+                <h3>Leaving on: {formatDate(flight.departure_day)}</h3>
+                <h4>${flight.price}</h4>
+            </div>
     )
 }
